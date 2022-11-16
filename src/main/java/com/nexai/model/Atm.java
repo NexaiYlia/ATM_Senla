@@ -1,41 +1,42 @@
 package com.nexai.model;
 
 public class Atm {
-    private int pinCode;
-    private String cardNumber;
-    private double balance;
+
+    private int id;
+    private String atmAddress;
+    private double limitOfAtm = 1000;
 
     public Atm() {
     }
 
-    public Atm(int pinCode, String cardNumber, double balance) {
-        this.pinCode = pinCode;
-        this.cardNumber = cardNumber;
-        this.balance = balance;
+    public Atm(int id, String atmAddress, double limitOfAtm) {
+        this.id = id;
+        this.atmAddress = atmAddress;
+        this.limitOfAtm = limitOfAtm;
     }
 
-    public int getPinCode() {
-        return pinCode;
+    public int getId() {
+        return id;
     }
 
-    public String getCardNumber() {
-        return cardNumber;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public double getBalance() {
-        return balance;
+    public String getAtmAddress() {
+        return atmAddress;
     }
 
-    public void setPinCode(int pinCode) {
-        this.pinCode = pinCode;
+    public void setAtmAddress(String atmAddress) {
+        this.atmAddress = atmAddress;
     }
 
-    public void setCardNumber(String cardNumber) {
-        this.cardNumber = cardNumber;
+    public double getLimitOfAtm() {
+        return limitOfAtm;
     }
 
-    public void setBalance(double balance) {
-        this.balance = balance;
+    public void setLimitOfAtm(double limitOfAtm) {
+        this.limitOfAtm = limitOfAtm;
     }
 
     @Override
@@ -45,18 +46,18 @@ public class Atm {
 
         Atm atm = (Atm) o;
 
-        if (pinCode != atm.pinCode) return false;
-        if (Double.compare(atm.balance, balance) != 0) return false;
-        return cardNumber != null ? cardNumber.equals(atm.cardNumber) : atm.cardNumber == null;
+        if (id != atm.id) return false;
+        if (Double.compare(atm.limitOfAtm, limitOfAtm) != 0) return false;
+        return atmAddress != null ? atmAddress.equals(atm.atmAddress) : atm.atmAddress == null;
     }
 
     @Override
     public int hashCode() {
         int result;
         long temp;
-        result = pinCode;
-        result = 31 * result + (cardNumber != null ? cardNumber.hashCode() : 0);
-        temp = Double.doubleToLongBits(balance);
+        result = id;
+        result = 31 * result + (atmAddress != null ? atmAddress.hashCode() : 0);
+        temp = Double.doubleToLongBits(limitOfAtm);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
     }
@@ -64,9 +65,9 @@ public class Atm {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Atm{");
-        sb.append("pinCode=").append(pinCode);
-        sb.append(", cardNumber='").append(cardNumber).append('\'');
-        sb.append(", balance=").append(balance);
+        sb.append("id=").append(id);
+        sb.append(", atmAddress='").append(atmAddress).append('\'');
+        sb.append(", limitOfAtm=").append(limitOfAtm);
         sb.append('}');
         return sb.toString();
     }
