@@ -1,12 +1,19 @@
 package com.nexai.model;
 
+import java.util.Set;
+
 public class Atm {
 
     private int id;
     private String atmAddress;
     private double limitOfAtm = 1000;
+    private Set<Card> cards;
 
     public Atm() {
+    }
+
+    public Atm(Set<Card> cards) {
+        this.cards = cards;
     }
 
     public Atm(int id, String atmAddress, double limitOfAtm) {
