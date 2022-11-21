@@ -1,56 +1,66 @@
 package com.nexai.service.impl;
 
+import com.nexai.model.Atm;
+import com.nexai.model.Bank;
+import com.nexai.model.Card;
 import com.nexai.service.AtmService;
+import com.nexai.validator.CardValidator;
 
 import java.util.Scanner;
 
 public class AtmServiceImpl implements AtmService {
 
+    Atm atm = Atm.getInstance();
+    Bank bank = new Bank();
     Scanner input = new Scanner(System.in);
 
+
     public void run() throws InterruptedException {
-        for (int i = 0; i < 2; i++) {
 
-            System.out.println("Hello! Please insert your bank card");
-            String inputCard = input.nextLine();
-            System.out.println("Enter password:");
-            int inputPwd = input.nextInt();
-
-            Boolean result = false;
-            if (result) {
-                result = true;
-            }
-
-            if (result == false) {
-                System.out.println("Wrong card number or pincode entered! Try again!");
-                continue;
-            } else if (i == 2) {
-                System.out.println("Data entered incorrectly! The card is blocked!");
-                return;
-            }
-
-        }
-        menu();
     }
 
-    public void menu() throws InterruptedException {
-        System.out.println("Авторизация прошла успешно. Выберите операцию:\n1.Проверить баланс;\n2.Пополнить баланс.\n3.Снять наличные");
-        int userChoice = input.nextInt();
-        switch (userChoice) {
-            case 1:
-                System.out.println("Баланс лицевого счета составляет:");
-                break;
-            case 2:
-                System.out.println("Введите сумму для пополнения счета:");
-                int money1 = input.nextInt();
-                break;
-            case 3:
-                System.out.println("Введите сумму для выдачи наличными:");
-                int money2 = input.nextInt();
-                break;
-            default:
-                wait(10000);
-                System.out.println("The session has ended. Take the card!");
+    public void menu(Card card) throws InterruptedException {
+        boolean result = true;
+        while (result) {
+            System.out.println("Choose an operation:\n" +
+                    "1)Card balance\n" +
+                    "2) Balance replenishment\n" +
+                    "3) Cash withdrawal\n" +
+                    "4) Exit");
+            int n = input.nextInt();
+            switch (n) {
+                case 1:
+                    System.out.println("You balance:" + card.getBalance());
+                    break;
+                case 2:
+                    System.out.println("Enter the amount to replenish the balance:");
+                    int addMoneyForCard = input.nextInt();
+                    card.setBalance(card.getBalance() + addMoneyForCard);
+                    atm.setAvailableCash(atm.getAvailableCash() + addMoneyForCard);
+                    break;
+                case 3:
+                    System.out.println("Enter cash withdrawal amount:");
+                    int minMoneyWithCard = input.nextInt();
+                    if (card.getBalance() >= minMoneyWithCard) {
+                        if (atm.getAvailableCash() >= minMoneyWithCard) {
+                            card.setBalance(card.getBalance() - minMoneyWithCard);
+                            atm.setAvailableCash(atm.getAvailableCash() - minMoneyWithCard);
+                        } else {
+                            System.out.println("Not enough cash in the ATM!");
+                        }
+                    } else {
+                        System.out.println("Not enough balance on the card!");
+                    }
+                    break;
+                case 4:
+                    result = false;
+                    break;
+                default:
+                    System.out.println("Invalid operation number. Choose from the list!");
+                    break;
+            }
         }
     }
 }
+
+

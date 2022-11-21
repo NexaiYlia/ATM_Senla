@@ -1,0 +1,2 @@
+Card{cardNumber='1111-2222-3333-4444', pinCode=1111, balance=0, block=false}
+Card{cardNumber='1100-1100-1100-1100', pinCode=2222, balance=0, block=true}

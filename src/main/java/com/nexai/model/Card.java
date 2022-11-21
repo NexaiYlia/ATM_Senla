@@ -1,40 +1,51 @@
 package com.nexai.model;
+
 public class Card {
-    private int pinCode;
     private String cardNumber;
-    private double balance;
+    private String pinCode;
+    private int balance;
+    private boolean block;
 
     public Card() {
     }
 
-    public Card(int pinCode, String cardNumber, double balance) {
-        this.pinCode = pinCode;
+    public Card(String cardNumber, String pinCode, int balance, boolean block) {
         this.cardNumber = cardNumber;
+        this.pinCode = pinCode;
         this.balance = balance;
-    }
-
-    public int getPinCode() {
-        return pinCode;
+        this.block = block;
     }
 
     public String getCardNumber() {
         return cardNumber;
     }
 
-    public double getBalance() {
-        return balance;
-    }
-
-    public void setPinCode(int pinCode) {
-        this.pinCode = pinCode;
-    }
-
     public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
     }
 
-    public void setBalance(double balance) {
+    public String getPinCode() {
+        return pinCode;
+    }
+
+    public void setPinCode(String pinCode) {
+        this.pinCode = pinCode;
+    }
+
+    public int getBalance() {
+        return balance;
+    }
+
+    public void setBalance(int balance) {
         this.balance = balance;
+    }
+
+    public boolean isBlock() {
+        return block;
+    }
+
+    public void setBlock(boolean block) {
+        this.block = block;
     }
 
     @Override
@@ -44,28 +55,28 @@ public class Card {
 
         Card card = (Card) o;
 
-        if (pinCode != card.pinCode) return false;
-        if (Double.compare(card.balance, balance) != 0) return false;
-        return cardNumber != null ? cardNumber.equals(card.cardNumber) : card.cardNumber == null;
+        if (balance != card.balance) return false;
+        if (block != card.block) return false;
+        if (cardNumber != null ? !cardNumber.equals(card.cardNumber) : card.cardNumber != null) return false;
+        return pinCode != null ? pinCode.equals(card.pinCode) : card.pinCode == null;
     }
 
     @Override
     public int hashCode() {
-        int result;
-        long temp;
-        result = pinCode;
-        result = 31 * result + (cardNumber != null ? cardNumber.hashCode() : 0);
-        temp = Double.doubleToLongBits(balance);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        int result = cardNumber != null ? cardNumber.hashCode() : 0;
+        result = 31 * result + (pinCode != null ? pinCode.hashCode() : 0);
+        result = 31 * result + balance;
+        result = 31 * result + (block ? 1 : 0);
         return result;
     }
 
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Card{");
-        sb.append("pinCode=").append(pinCode);
-        sb.append(", cardNumber='").append(cardNumber).append('\'');
+        sb.append("cardNumber='").append(cardNumber).append('\'');
+        sb.append(", pinCode='").append(pinCode).append('\'');
         sb.append(", balance=").append(balance);
+        sb.append(", block=").append(block);
         sb.append('}');
         return sb.toString();
     }
