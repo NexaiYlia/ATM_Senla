@@ -1,7 +1,6 @@
 package com.nexai.service.impl;
 
 import com.nexai.model.Atm;
-import com.nexai.model.Bank;
 import com.nexai.model.Card;
 import com.nexai.service.AtmService;
 
@@ -10,7 +9,6 @@ import java.util.Scanner;
 public class AtmServiceImpl implements AtmService {
 
     public Atm atm = Atm.getInstance();
-    public Bank bank = new Bank();
     Scanner input = new Scanner(System.in);
 
     public void menu(Card card)  {

@@ -11,13 +11,13 @@ public class CardServiceImpl implements CardService {
     Bank bank = Bank.getInstance();
     Scanner input = new Scanner(System.in);
 
-    public Card inputCard() {
+    public Card checkCardNumber() {
         Card card = null;
         boolean flag = false;
         while (!flag) {
             System.out.println("Please, enter your bank card in the format:XXXX-XXXX-XXXX-XXXX");
             String inputCard = input.nextLine();
-            if (CardValidator.validateCardNumber(inputCard)&& inputCard != null) {
+            if (CardValidator.validateCardNumber(inputCard) && inputCard != null) {
                 card = bank.getCards()
                         .stream()
                         .filter(o -> inputCard.toString().equals(o.getCardNumber()))
@@ -30,7 +30,7 @@ public class CardServiceImpl implements CardService {
         }
         System.out.println(card);
         if (!card.isBlock()) {
-            if (tryInputCard(card)) {
+            if (checkPinCode(card)) {
                 System.out.println("Successful login");
                 return card;
             }
@@ -40,7 +40,7 @@ public class CardServiceImpl implements CardService {
         return null;
     }
 
-    public boolean tryInputCard(Card card) {
+    public boolean checkPinCode(Card card) {
         String password;
         System.out.println("Please, enter your pin code:");
         for (int i = 3; i >= 0; i--) {

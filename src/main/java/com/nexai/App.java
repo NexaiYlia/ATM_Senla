@@ -16,7 +16,7 @@ public class App {
         System.out.println(cards);
         CardServiceImpl cardService = new CardServiceImpl();
         AtmServiceImpl service = new AtmServiceImpl();
-        Card card = cardService.inputCard();
+        Card card = cardService.checkCardNumber();
         if (card != null) {
             service.menu(card);
             cards.add(card);

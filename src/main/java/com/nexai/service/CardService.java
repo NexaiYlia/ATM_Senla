@@ -1,10 +1,9 @@
 package com.nexai.service;
 
 import com.nexai.model.Card;
-import com.nexai.validator.CardValidator;
 
 public interface CardService {
-    Card inputCard();
+    Card checkCardNumber();
 
-    boolean tryInputCard(Card card);
+    boolean checkPinCode(Card card);
 }
