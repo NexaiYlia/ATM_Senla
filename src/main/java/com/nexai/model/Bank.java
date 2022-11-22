@@ -2,11 +2,11 @@ package com.nexai.model;
 
 import com.nexai.reader.DataReader;
 
-import java.util.List;
+import java.util.Set;
 
 public class Bank {
     private static Bank instance = new Bank();
-    private List<Card> cards;
+    private Set<Card> cards;
 
     public static Bank getInstance() {
         return instance;
@@ -17,11 +17,11 @@ public class Bank {
     }
 
 
-    public List<Card> getCards() {
+    public Set<Card> getCards() {
         return cards;
     }
 
-    public void setCards(List<Card> cards) {
+    public void setCards(Set<Card> cards) {
         this.cards = cards;
     }
 

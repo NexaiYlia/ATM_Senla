@@ -40,7 +40,7 @@ public class CardServiceImpl implements CardService {
         return null;
     }
 
-    private boolean tryInputCard(Card card) {
+    public boolean tryInputCard(Card card) {
         String password;
         System.out.println("Please, enter your pin code:");
         for (int i = 3; i >= 0; i--) {

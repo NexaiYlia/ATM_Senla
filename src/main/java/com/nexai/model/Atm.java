@@ -21,4 +21,27 @@ public class Atm {
     public void setAvailableCash(int availableCash) {
         this.availableCash = availableCash;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Atm atm = (Atm) o;
+
+        return availableCash == atm.availableCash;
+    }
+
+    @Override
+    public int hashCode() {
+        return availableCash;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Atm{");
+        sb.append("availableCash=").append(availableCash);
+        sb.append('}');
+        return sb.toString();
+    }
 }

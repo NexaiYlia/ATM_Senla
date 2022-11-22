@@ -4,31 +4,25 @@ import com.nexai.model.Atm;
 import com.nexai.model.Bank;
 import com.nexai.model.Card;
 import com.nexai.service.AtmService;
-import com.nexai.validator.CardValidator;
 
 import java.util.Scanner;
 
 public class AtmServiceImpl implements AtmService {
 
-    Atm atm = Atm.getInstance();
-    Bank bank = new Bank();
+    public Atm atm = Atm.getInstance();
+    public Bank bank = new Bank();
     Scanner input = new Scanner(System.in);
 
-
-    public void run() throws InterruptedException {
-
-    }
-
-    public void menu(Card card) throws InterruptedException {
+    public void menu(Card card)  {
         boolean result = true;
         while (result) {
             System.out.println("Choose an operation:\n" +
-                    "1)Card balance\n" +
+                    "1) Card balance\n" +
                     "2) Balance replenishment\n" +
                     "3) Cash withdrawal\n" +
                     "4) Exit");
-            int n = input.nextInt();
-            switch (n) {
+            int number = input.nextInt();
+            switch (number) {
                 case 1:
                     System.out.println("You balance:" + card.getBalance());
                     break;
@@ -40,11 +34,12 @@ public class AtmServiceImpl implements AtmService {
                     break;
                 case 3:
                     System.out.println("Enter cash withdrawal amount:");
-                    int minMoneyWithCard = input.nextInt();
-                    if (card.getBalance() >= minMoneyWithCard) {
-                        if (atm.getAvailableCash() >= minMoneyWithCard) {
-                            card.setBalance(card.getBalance() - minMoneyWithCard);
-                            atm.setAvailableCash(atm.getAvailableCash() - minMoneyWithCard);
+                    int cashAdvance = input.nextInt();
+                    if (card.getBalance() >= cashAdvance) {
+                        if (atm.getAvailableCash() >= cashAdvance) {
+                            card.setBalance(card.getBalance() - cashAdvance);
+                            atm.setAvailableCash(atm.getAvailableCash() - cashAdvance);
+                            break;
                         } else {
                             System.out.println("Not enough cash in the ATM!");
                         }
@@ -54,6 +49,7 @@ public class AtmServiceImpl implements AtmService {
                     break;
                 case 4:
                     result = false;
+                    System.out.println("Take your card, please. Goodbye!");
                     break;
                 default:
                     System.out.println("Invalid operation number. Choose from the list!");

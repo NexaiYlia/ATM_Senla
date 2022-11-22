@@ -15,7 +15,6 @@ public class CardValidator {
             return false;
         }
     }
-
     public static boolean validPassword(String password) {
         Pattern pattern = Pattern.compile(FORMAT_OF_PASSWORD);
         Matcher matcher = pattern.matcher(password);
