@@ -10,7 +10,7 @@ import com.nexai.writer.DataWriter;
 import java.util.Set;
 
 public class App {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args)  {
         Set<Card> cards = DataReader.getCards();
         DataWriter writer = new DataWriter();
         System.out.println(cards);
